@@ -1,0 +1,19 @@
+<mat-form-field *ngIf="selected" appearance="outline" appearance="outline">
+  <mat-label>{{ selectLabel }}</mat-label>
+  <mat-select [(value)]="selected" (selectionChange)="onChange($event)" (focus)="onFocus(getDistrictsByAmphur)"
+    [disabled]="selectDisabled"><input matInput placeholder="search" #inputSearch />
+    <mat-option *ngFor="let d of listDistricts | searchdistrict : inputSearch.value" [value]="d.district_ID">{{
+      d.district_NAME }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field *ngIf="!selected" appearance="outline" appearance="outline">
+  <mat-label>{{ selectLabel }}</mat-label>
+  <mat-select (focus)="onFocus(getDistrictsByAmphur)" (selectionChange)="onChange($event)"><input matInput
+      placeholder="search" #inputSearch />
+    <mat-option *ngFor="let d of listDistricts | searchdistrict : inputSearch.value" [value]="d.district_ID">{{
+      d.district_NAME }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

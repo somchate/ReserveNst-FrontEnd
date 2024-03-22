@@ -1,0 +1,19 @@
+<mat-form-field *ngIf="selected" appearance="outline" style="width: 11vw">
+    <mat-label>{{ selectLabel }}</mat-label>
+    <mat-select [(value)]="selected" (selectionChange)="onChange($event)" [disabled]="!selectDisabled"><input matInput
+            placeholder="search" #inputSearch />
+        <mat-option *ngFor="let s of listSchool | searchschool : inputSearch.value" [value]="s.school.school_ID">{{
+            s.school.school_SHORTNAME }}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+
+<mat-form-field *ngIf="!selected" appearance="outline" style="width: 11vw">
+    <mat-label>{{ selectLabel }}</mat-label>
+    <mat-select [disabled]="selectDisabled" (focus)="onFocus(selectUnitId)" (selectionChange)="onChange($event)"><input
+            matInput placeholder="search" #inputSearch />
+        <mat-option *ngFor="let s of listSchool | searchschool : inputSearch.value" [value]="s.school.school_ID">{{
+            s.school.school_SHORTNAME }}
+        </mat-option>
+    </mat-select>
+</mat-form-field>

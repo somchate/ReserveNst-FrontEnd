@@ -1,0 +1,29 @@
+<!-- <app-navbar></app-navbar>
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <app-items-create></app-items-create>
+    </div>
+    <div class="col-md-8">
+      <app-items></app-items>
+    </div>
+  </div>
+</div> -->
+
+<!-- <h1>Website</h1>
+<a routerLink="/requestperson" routerLinkActive="active">RequestPerson |</a>
+<a routerLink="/listperson" routerLinkActive="active">| ListPerson</a>
+<a routerLink="/login" routerLinkActive="active">| Login</a> -->
+
+
+<div *ngIf=isdisablevalue()><app-navbar isdisable = false ></app-navbar></div>
+<lib-ng-toast></lib-ng-toast>
+<router-outlet></router-outlet>
+<div *ngIf=isdisablevalue()><app-footer></app-footer></div>
+
+
+
+<!-- <div *ngIf=isdisablevalue()><app-navbar isdisable = false ></app-navbar></div> -->
+
+
+<!-- <app-spinner></app-spinner> -->

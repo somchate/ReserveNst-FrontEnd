@@ -1,0 +1,40 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+* {
+  font-family: 'kanit', 'IBM Plex Sans Thai Looped', sans-serif;
+  font-size: 0.9rem;
+}
+
+mat-icon {
+  font-family: 'Material Icons' !important;
+}
+
+.spinner {
+  width: 100px !important;
+  height: 100px;
+  border: 16px solid blue;
+  border-top: 16px solid #fff;
+  border-radius: 50%;
+  animation: load 1s linear infinite;
+}
+
+@keyframes load {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+
+}

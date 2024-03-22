@@ -1,0 +1,119 @@
+<mat-dialog-content>
+
+    <div>{{title}}
+        <button mat-icon-button class=" close-button" [mat-dialog-close]="true">
+            <mat-icon color="warn">close</mat-icon>
+        </button>
+    </div>
+
+    <form [formGroup]="documentForm">
+        <div class="grid">
+            <mat-form-field hidden>
+                <input formControlName="id" maxlength="20" matInput autocomplete="off">
+            </mat-form-field>
+            <input [(ngModel)]="selectedUnitTrainOutPut" formControlName="unit_TRAIN_ID" maxlength="30" matInput
+                placeholder="รหัสหน่วยฝึกวิชาทหาร" autocomplete="off" hidden>
+            <input formControlName="unit_TRAIN_SHORTNAME" maxlength="30" matInput placeholder="ชื่อย่อหน่วยฝึกวิชาทหาร"
+                autocomplete="off" hidden>
+            <app-unittrainlist selected="{{ selectedUnitTrainOutPut }}" selectLabel="หน่วยฝึกวิชาทหาร"
+                (selectChangeValue)="getSelectUnitTrainChangeValue($event)"></app-unittrainlist>
+            <mat-form-field appearance="outline">
+                <mat-label>เลขที่หน้งสือ</mat-label>
+                <input formControlName="doc_NO" maxlength="20" matInput placeholder="เลขที่หนังสือ" autocomplete="off">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>ชื่อหนังสือเรื่อง</mat-label>
+                <input formControlName="doc_NAME" maxlength="60" matInput placeholder="ชื่อหนังสือเรื่อง"
+                    autocomplete="off">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>ลงวันที่</mat-label>
+                <input (dateChange)="toAtYear($event.value)" matInput [matDatepicker]="pickerDocDate"
+                    formControlName="doc_DATE">
+                <mat-datepicker-toggle matSuffix [for]="pickerDocDate"></mat-datepicker-toggle>
+                <mat-datepicker #pickerDocDate></mat-datepicker>
+            </mat-form-field>
+
+
+            <mat-form-field appearance="outline" hidden>
+                <mat-label>แผนก</mat-label>
+                <input [(ngModel)]="selectedDepartmentOutPut" formControlName="doc_DEPARTMENT_ID" maxlength="20"
+                    matInput placeholder="แผนก" autocomplete="off" />
+            </mat-form-field>
+
+            <app-departmentlist selected="{{ selectedDepartmentOutPut }}" selectDisabled="{{ departmentSelectDisable }}"
+                selectLabel="แผนก" (selectChangeValue)="getSelectDepartmentChangeValue($event)"></app-departmentlist>
+
+            <mat-form-field appearance="outline">
+                <mat-label>ปีที่นำตัวขึ้นทะเบียน/นำปลดฯ</mat-label>
+                <input formControlName="at_YEAR" maxlength="20" matInput placeholder="ปีที่ขึ้นทะเบียน/นำปลดฯ"
+                    autocomplete="off" readonly="true">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" hidden>
+                <mat-label>เสนอ->สง.สด.จว.</mat-label>
+                <input [(ngModel)]="selectedUnitOutPut" formControlName="recruit_UNIT_ID" maxlength="30" matInput
+                    placeholder="เสนอ->สง.สด.จว." autocomplete="off">
+            </mat-form-field>
+
+            <input formControlName="recruit_UNIT_SHORTNAME" maxlength="30" matInput placeholder="ชื่อย่อสัสดีจังหวัด"
+                autocomplete="off" hidden>
+            <app-unitlist selected="{{ selectedUnitOutPut }}" selectLabel="เสนอ->สง.สด.จว."
+                (selectChangeValue)="getSelectUnitChangeValue($event)"></app-unitlist>
+
+            <mat-form-field appearance="outline" hidden>
+                <mat-label>รหัสจังหวัดที่สำนักงานสัสดีรับผิดชอบ</mat-label>
+                <input formControlName="recruit_PROVINCE_ID" maxlength="50" matInput
+                    placeholder="รหัสจังหวัดที่สำนักงานสัสดีรับผิดชอบ" autocomplete="off">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>ผู้บันทึกข้อมูล</mat-label>
+                <input formControlName="user_VERIFY" maxlength="50" matInput placeholder="ผู้บันทึกข้อมูล"
+                    autocomplete="off">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>หมายเหตุ</mat-label>
+                <input formControlName="doc_NOTE" maxlength="30" matInput placeholder="หมายเหตุ" autocomplete="off">
+            </mat-form-field>
+
+        </div>
+
+        <div>{{titleForUnit}}</div>
+
+        <div class="grid">
+            <mat-form-field appearance="outline">
+                <mat-label>เลขที่รับหน้งสือ</mat-label>
+                <input [(ngModel)]="docNo" formControlName="recruit_DOC_NO" maxlength="20" matInput
+                    placeholder="เลขที่หนังสือ" autocomplete="off">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>ลงวันที่</mat-label>
+                <input [(ngModel)]="docDate" (dateChange)="toAtYear($event.value)" matInput
+                    [matDatepicker]="pickerRecruitDocDate" formControlName="recruit_DOC_DATE">
+                <mat-datepicker-toggle matSuffix [for]="pickerRecruitDocDate"></mat-datepicker-toggle>
+                <mat-datepicker #pickerRecruitDocDate></mat-datepicker>
+            </mat-form-field>
+
+            <button mat-icon-button class="cleardoc-button" (click)="unAcceptDoc()" [hidden]="!isUnAccept">
+                <mat-icon color="warn">cancel</mat-icon>
+            </button>
+
+        </div>
+
+    </form>
+
+    <div *ngIf="!isUnAccept">
+        <button mat-raised-button color="primary" [disabled]="docNo=='' || docNo==null || docDate=='' || docDate==null"
+            (click)="updateDocument()" (click)="onClear()">{{actionBtn}}</button>
+        <button style="margin-left: 8px;" mat-raised-button color="primary" (click)="onClose()">ปิด</button>
+    </div>
+    <div *ngIf="isUnAccept">
+        <button mat-raised-button color="primary"
+            [disabled]="!(docNo=='' || docNo==null || docDate=='' || docDate==null)" (click)="updateDocument()"
+            (click)="onClear()">{{actionBtn}}</button>
+        <button style="margin-left: 8px;" mat-raised-button color="primary" (click)="onClose()">ปิด</button>
+    </div>
+
+</mat-dialog-content>

@@ -1,0 +1,186 @@
+<div class="container" style="margin-top: 1rem">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="container">
+        <form [formGroup]="verifyForm">
+          <div style="margin-top: 0px">
+            <div>
+              <mat-form-field appearance="fill">
+                <mat-label>ค้นหา -> เลขประจำตัวประชาชน</mat-label>
+                <input
+                  matInput
+                  type="text"
+                  [(ngModel)]="filterValue"
+                  (input)="findByCitizenId(filter.value)"
+                  placeholder="Search by Citizen id"
+                  #filter
+                />
+              </mat-form-field>
+            </div>
+            <div class="mat-elevation-z8">
+              <table mat-table [dataSource]="dataSource.content" matSort>
+                <!-- ID Column -->
+                <ng-container matColumnDef="Running">
+                  <th
+                    class="text-center"
+                    mat-header-cell
+                    *matHeaderCellDef
+                    mat-sort-header
+                  >
+                    ลำดับ
+                  </th>
+                  <td
+                    class="text-center"
+                    mat-cell
+                    *matCellDef="let row; let i = index"
+                  >
+                    {{ i + 1 + pageIndex * pageSize }}
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="ID">
+                  <!-- <th mat-header-cell *matHeaderCellDef mat-sort-header> ลำดับ </th> -->
+                  <td class="text-center" mat-cell *matCellDef="let row">
+                    {{ row.id }}
+                  </td>
+                </ng-container>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="RequestAgency">
+                  <th
+                    class="text-center"
+                    mat-header-cell
+                    *matHeaderCellDef
+                    mat-sort-header
+                  >
+                    #ประชาชน
+                  </th>
+                  <td class="text-center" mat-cell *matCellDef="let row">
+                    {{ row.citizen_id }}
+                  </td>
+                </ng-container>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="BookRequestNo">
+                  <th
+                    class="text-center"
+                    mat-header-cell
+                    *matHeaderCellDef
+                    mat-sort-header
+                  >
+                    ชื่อตัว-ชื่อสกุล
+                  </th>
+                  <td class="text-center" mat-cell *matCellDef="let row">
+                    {{ row.first_name }} &nbsp;&nbsp; {{ row.last_name }}
+                  </td>
+                </ng-container>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="BookRequestDate">
+                  <th
+                    class="text-center"
+                    mat-header-cell
+                    *matHeaderCellDef
+                    mat-sort-header
+                  >
+                    ปีตรวจเลือกฯ
+                  </th>
+                  <td class="text-center" mat-cell *matCellDef="let row">
+                    {{ row.result_year }}
+                  </td>
+                </ng-container>
+
+                <!-- Name Column -->
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="VerifyUser">
+                  <th
+                    class="text-center"
+                    mat-header-cell
+                    *matHeaderCellDef
+                    mat-sort-header
+                  >
+                    เลขที่ สด.43
+                  </th>
+                  <td class="text-center" mat-cell *matCellDef="let row">
+                    {{ row.issue_no }}
+                  </td>
+                </ng-container>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="SaveDate">
+                  <th
+                    class="text-center"
+                    mat-header-cell
+                    *matHeaderCellDef
+                    mat-sort-header
+                  >
+                    ผลการตรวจเลือกฯ
+                  </th>
+                  <td class="text-center" mat-cell *matCellDef="let row">
+                    {{ row.result_mean }}
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Amount">
+                  <th
+                    class="text-center"
+                    mat-header-cell
+                    *matHeaderCellDef
+                    mat-sort-header
+                  >
+                    บันทึกอื่นๆ
+                  </th>
+                  <td class="text-center" mat-cell *matCellDef="let row">
+                    {{ row.result_comment }}
+                  </td>
+                </ng-container>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="Comment">
+                  <th
+                    class="text-center"
+                    mat-header-cell
+                    *matHeaderCellDef
+                    mat-sort-header
+                  >
+                    หมายเหตุ
+                  </th>
+                  <td class="text-center" mat-cell *matCellDef="let row">
+                    {{ row.comment }}
+                  </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr
+                  mat-row
+                  *matRowDef="let row; columns: displayedColumns"
+                ></tr>
+
+                <!-- Row shown when there is no matching data. -->
+                <tr class="mat-row" *matNoDataRow>
+                  <td class="mat-cell" colspan="4">
+                    No data matching the filter "{{ filter.value }}"
+                  </td>
+                </tr>
+              </table>
+              <!-- <mat-paginator [pageSizeOptions]="[9, 18, 36]" aria-label="Select page of users">
+                            </mat-paginator> -->
+              <app-spinner-standalone [Wait]="loading"></app-spinner-standalone>
+
+              <mat-paginator
+                [hidePageSize]="true"
+                [length]="dataSource.totalElements"
+                [pageSize]="dataSource.size"
+                [pageSizeOptions]="[5, 10, 25, 100]"
+                (page)="pageEvent = $event; onPaginateChange($event)"
+                showFirstLastButtons
+              >
+              </mat-paginator>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

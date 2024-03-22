@@ -1,0 +1,234 @@
+<div class="container" style="margin-top: 1rem; margin-bottom: 1rem;">
+    <form [formGroup]="documentFormGroup">
+        <div class="container box" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%"
+            fxLayoutAlign="flex-start">
+            <div>
+                <button mat-icon-button color="primary">
+                    <mat-icon>library_add</mat-icon></button>{{ title }}
+            </div>
+            <div class="push">
+                <mat-form-field class="example-form-field">
+                    <mat-label>หนังสือเลขที่</mat-label>
+                    <input matInput type="text" formControlName="documentNo" placeholder="#หนังสือเลขที่"
+                        autocomplete="off">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field class="example-form-field">
+                    <mat-label>เรื่อง</mat-label>
+                    <input matInput type="text" formControlName="documentName" placeholder="เรื่อง" autocomplete="off">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field class="example-form-field">
+                    <mat-label>ลงวันที่</mat-label>
+                    <input matInput type="text" formControlName="documentDate" placeholder="ลงวันที่"
+                        autocomplete="off">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field class="example-form-field">
+                    <mat-label>หน่วยฝึกวิชาทหาร</mat-label>
+                    <input matInput type="text" formControlName="unitTrainName" placeholder="หน่วยฝึกวิชาทหาร"
+                        autocomplete="off">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field class="example-form-field">
+                    <mat-label>สำนักงานสัสดีจังหวัด</mat-label>
+                    <input matInput type="text" formControlName="recruitUnitName" placeholder="สำนักงานสัสดีจังหวัด"
+                        autocomplete="off">
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="container box" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%"
+            fxLayoutAlign="flex-start">
+            <mat-form-field appearance="outline" hidden>
+                <mat-label>แผนก</mat-label>
+                <input [(ngModel)]="selectedDepartmentOutPut" formControlName="documentDept" maxlength="20" matInput
+                    placeholder="แผนก" autocomplete="off" />
+            </mat-form-field>
+            <app-departmentlist selected="{{ selectedDepartmentOutPut }}" selectDisabled="{{ departmentSelectDisable }}"
+                selectLabel="แผนก" (selectChangeValue)="getSelectDepartmentChangeValue($event)"></app-departmentlist>
+            <mat-form-field appearance="outline">
+                <mat-label>พ.ศ.ขึ้นทะเบียนฯ</mat-label>
+                <input formControlName="documentAtYear" maxlength="5" matInput placeholder="พ.ศ.ขึ้นทะเบียนฯ"
+                    autocomplete="off" />
+            </mat-form-field>
+            <input [(ngModel)]="selectedProvinceOutPut" formControlName="recruitProvince" maxlength="30" matInput
+                placeholder="จังหวัด-ภูมิลำเนาทหาร" autocomplete="off" hidden />
+            <app-provinceslist selected="{{ selectedProvinceOutPut }}" selectDisabled="{{ selectProvinceDisabled }}"
+                selectLabel="จังหวัด-ภูมิลำเนาทหาร"
+                (selectChangeValue)="getSelectProvinceChangeValue($event)"></app-provinceslist>
+            <div>
+                <mat-form-field appearance="outline">
+                    <mat-label>เลขทะเบียนทหาร 5 หลัก(เริ่มต้น)</mat-label>
+                    <input matInput type="text" numberOnly placeholder="เลขทะเบียนทหาร 5 หลัก" #filter />
+                </mat-form-field>
+            </div>
+            <div class="push">
+                <mat-form-field appearance="outline">
+                    <mat-label>ค้นหา -> รายชื่อ นศท.</mat-label>
+                    <input matInput type="text" [(ngModel)]="filterValue" (input)="findByName(filter.value)"
+                        placeholder="Search by name" #filter />
+                </mat-form-field>
+            </div>
+        </div>
+    </form>
+    <form [formGroup]="schoolFormGroup">
+
+    </form>
+    <form [formGroup]="nstFormGroup">
+        <div style="margin-top: 0px">
+            <div class="mat-elevation-z8">
+                <table mat-table [dataSource]="dataSource.content" matSort>
+                    <!-- ID Column -->
+                    <ng-container matColumnDef="nstRd25">
+                        <th class="text-center" mat-header-cell *matHeaderCellDef mat-sort-header>
+                            ลำดับ
+                        </th>
+                        <td class="text-center" mat-cell *matCellDef="let row">
+                            {{ row.nst_RD25 }}
+                        </td>
+                    </ng-container>
+
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="select">
+                        <th class="text-center" mat-header-cell *matHeaderCellDef class="text-center">
+                            <div class="text-center">
+                                <mat-checkbox #checkboxstatus [checked]="checkboxOptionValue"
+                                    (change)="addNstToDocArrayByOption()" [disabled]="isDisable"></mat-checkbox>
+                            </div>
+                        </th>
+                        <td mat-cell *matCellDef="let row">
+                            <div class="text-center" *ngIf="row.armyprovinces!=null">
+                                <div class="text-center" *ngIf="row.to_SD3_MI_SIGN_NO">
+                                    <mat-icon class="close-icon" style="color: #008b00;">check_circle</mat-icon>
+                                </div>
+
+                                <div class="text-center" *ngIf="!row.to_SD3_MI_SIGN_NO">
+                                    <mat-checkbox #checkbox [checked]="checkboxOptionValue"
+                                        [disabled]="row.to_SD3_MI_SIGN_NO "
+                                        (change)="addNstToDocArray($event,row)"></mat-checkbox>
+                                </div>
+                            </div>
+                        </td>
+                    </ng-container>
+
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="nstRegPid">
+                        <th class="text-center" mat-header-cell *matHeaderCellDef mat-sort-header>
+                            #ประจำตัวประชาชน
+                        </th>
+                        <td class="text-center" mat-cell *matCellDef="let row" (click)="showNstForRegisterItem(row)">
+                            <div style="cursor: hand; cursor: pointer; color:blue">
+                                {{ row.reg_PID }}
+                            </div>
+                        </td>
+                    </ng-container>
+
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="regName">
+                        <th class="text-center" mat-header-cell *matHeaderCellDef mat-sort-header>
+                            ชื่อ-นามสกุล
+                        </th>
+                        <td class="text-left" mat-cell *matCellDef="let row">
+                            {{ row.reg_TITLE }}
+                            {{ row.reg_FNAME }} {{ row.reg_LNAME }}
+                        </td>
+                    </ng-container>
+
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="nstAtClass">
+                        <th class="text-center" mat-header-cell *matHeaderCellDef mat-sort-header>
+                            ชั้นปีที่
+                        </th>
+                        <td class="text-center" mat-cell *matCellDef="let row">
+                            {{ row.nst_AT_CLASS }}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="nstAtYear">
+                        <th class="text-center" mat-header-cell *matHeaderCellDef mat-sort-header>
+                            ปีการศึกษา
+                        </th>
+                        <td class="text-center" mat-cell *matCellDef="let row">
+                            {{ row.at_YEAR }}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="nstStatus">
+                        <th class="text-center" mat-header-cell *matHeaderCellDef mat-sort-header>
+                            สถานะภาพ
+                        </th>
+                        <td class="text-center" mat-cell *matCellDef="let row">
+                            {{ row.nstStatusCode["0"].nst_STATUS_DESC }}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="armyProvince">
+                        <th class="text-center" mat-header-cell *matHeaderCellDef mat-sort-header>
+                            อำเภอ/จังหวัด-ภูมิลำเนาทหาร
+                        </th>
+                        <td class="text-center" mat-cell *matCellDef="let row">
+                            {{
+                            row.armyprovinces == null
+                            ? "-"
+                            : row.reg_ARMY_AMPHUR_NAME + '/' +row.armyprovinces[0].province_NAME
+                            }}
+                        </td>
+                    </ng-container>
+
+
+                    <ng-container matColumnDef="print">
+                        <th class="text-center" mat-header-cell *matHeaderCellDef class="text-center">
+                            <div class="text-center">
+                                แบบ สด.3
+                            </div>
+                        </th>
+                        <td mat-cell *matCellDef="let row">
+                            <div class="text-center" *ngIf="row.armyprovinces!=null">
+                                <button mat-icon-button color="primary" [disabled]="!row.to_SD3_MI_SIGN_NO">
+                                    <mat-icon>print</mat-icon>
+                                </button>
+                            </div>
+                            <div class="text-center" *ngIf="row.armyprovinces==null">
+                                <button mat-icon-button color="primary" [disabled]="!row.to_SD3_MI_SIGN_NO">
+                                    <mat-icon>print</mat-icon>
+                                </button>
+                            </div>
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+                    <!-- Row shown when there is no matching data. -->
+                    <tr class="mat-row" *matNoDataRow>
+                        <td class="mat-cell" colspan="4">
+                            No data matching the filter "{{ filter.value }}"
+                        </td>
+                    </tr>
+                </table>
+                <app-spinner-standalone [Wait]="loading"></app-spinner-standalone>
+                <mat-toolbar>
+                    <mat-toolbar-row><span class="example-spacer"></span>
+                        <mat-paginator [hidePageSize]="true" [length]="dataSource.totalElements"
+                            [pageSize]="dataSource.size" [pageSizeOptions]="[5, 10, 25, 100]"
+                            (page)="pageEvent = $event; onPaginateChange($event)" showFirstLastButtons>
+                        </mat-paginator>
+                        <button disabled="{{ isDisable }}" mat-icon-button class="example-icon"
+                            aria-label="Example icon-button with share icon" (click)="deleteNstFromDocSd3()">
+                            <mat-icon title="ออกเลข" color="primary">add_circle_outline</mat-icon>
+                        </button>
+                        <button disabled="{{ isDisable }}" mat-icon-button class="example-icon"
+                            aria-label="Example icon-button with share icon" (click)="deleteNstFromDocSd3()">
+                            <mat-icon title="ออกเลข" color="primary">block</mat-icon>
+                        </button>
+                    </mat-toolbar-row>
+                </mat-toolbar>
+
+            </div>
+        </div>
+    </form>
+</div>

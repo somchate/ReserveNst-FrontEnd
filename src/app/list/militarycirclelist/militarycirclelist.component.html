@@ -1,0 +1,19 @@
+<mat-form-field *ngIf="selected" appearance="outline">
+  <mat-label>{{ selectLabel }}</mat-label>
+  <mat-select [(value)]="selected" (selectionChange)="onChange($event)" [disabled]="!selectDisabled"><input matInput
+      placeholder="search" #inputSearch />
+    <mat-option *ngFor="let m of listMilitaryCircle | searchmilitarycircle : inputSearch.value" [value]="m.crcl_ID">{{
+      m.crcl_ABBR }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field *ngIf="!selected" appearance="outline">
+  <mat-label>{{ selectLabel }}</mat-label>
+  <mat-select [disabled]="selectDisabled" (focus)="onFocus(selectedMilitaryCircleId)"
+    (selectionChange)="onChange($event)"><input matInput placeholder="search" #inputSearch />
+    <mat-option *ngFor="let m of listMilitaryCircle | searchmilitarycircle : inputSearch.value" [value]="m.crcl_ID">{{
+      m.crcl_ABBR }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

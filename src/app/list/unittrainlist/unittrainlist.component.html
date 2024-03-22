@@ -1,0 +1,38 @@
+@if(selected){
+<mat-form-field appearance="outline" appearance="outline">
+  <mat-label>{{ selectLabel }}</mat-label>
+  <mat-select [(value)]="selected" (selectionChange)="onChange($event)" [disabled]="selectDisabled">
+    @for( u of listUnittrain; track u.unit_ID){
+    <mat-option class="mat-select-content" [value]="u.unit_ID">{{ u.unit_SHORTNAME }}
+    </mat-option>
+    }
+  </mat-select>
+</mat-form-field>
+} @else {
+<mat-form-field appearance="outline" appearance="outline">
+  <mat-label>{{ selectLabel }}</mat-label>
+  <mat-select [disabled]="selectDisabled" (selectionChange)="onChange($event) ">
+    @for( u of listUnittrain; track u.unit_ID){
+    <mat-option class="mat-select-content" [value]="u.unit_ID">{{ u.unit_SHORTNAME }}
+    </mat-option>
+    }
+  </mat-select>
+</mat-form-field>
+}
+
+
+<!-- <mat-form-field *ngIf="selected" appearance="outline" appearance="outline">
+  <mat-label>{{ selectLabel }}</mat-label>
+  <mat-select [(value)]="selected" (selectionChange)="onChange($event)" [disabled]="selectDisabled">
+    <mat-option *ngFor="let u of listUnittrain" [value]="u.unit_ID">{{ u.unit_SHORTNAME }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field *ngIf="!selected" appearance="outline" appearance="outline">
+  <mat-label>{{ selectLabel }}</mat-label>
+  <mat-select [disabled]="selectDisabled" (selectionChange)="onChange($event) ">
+    <mat-option *ngFor="let u of listUnittrain" [value]="u.unit_ID">{{ u.unit_SHORTNAME }}
+    </mat-option>
+  </mat-select>
+</mat-form-field> -->

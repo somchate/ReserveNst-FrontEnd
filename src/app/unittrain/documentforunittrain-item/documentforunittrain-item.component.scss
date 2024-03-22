@@ -1,0 +1,70 @@
+* {
+    font-family: 'Kanit', sans-serif;
+}
+
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+}
+
+.example-full-width {
+    width: 30%;
+}
+
+.container {
+    max-width: 100%;
+    height: 80%;
+    margin: 0 auto;
+    border: 1px solid white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: white;
+}
+
+.child {
+    width: 100%;
+    // height: 150px;
+    justify-content: center;
+    // background: orange;
+}
+
+.mat-datepicker {
+    width: 17%;
+}
+
+.grid {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(200px, 1fr));
+    // grid-template-columns: 1fr 1fr 1fr 1fr;
+    column-gap: 7px;
+    row-gap: 1px;
+}
+
+.close-button {
+    float: right;
+    top: -40px;
+    right: -23px;
+
+}
+
+.close-icon {
+    transition: 1s ease-in-out;
+}
+
+.close-icon:hover {
+    transform: rotate(180deg);
+}
+
+::ng-deep .icon-outside .close-button {
+    float: right;
+    top: -52px;
+    right: -52px;
+}
+
+::ng-deep .icon-outside .mat-dialog-container {
+    overflow: unset
+}

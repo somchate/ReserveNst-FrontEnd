@@ -1,0 +1,20 @@
+.readonly-wrapper {
+    cursor: not-allowed;
+}
+
+.readonly-wrapper .readonly-block {
+    pointer-events: none;
+}
+
+* {
+    font-family: 'Kanit', sans-serif;
+    // font-size: 0.9rem;
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+.mat-select-content {
+    font-family: 'Kanit', sans-serif !important;
+}

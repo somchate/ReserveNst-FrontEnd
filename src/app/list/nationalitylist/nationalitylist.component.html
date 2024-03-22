@@ -1,0 +1,21 @@
+<mat-form-field *ngIf="selected" appearance="outline">
+  <mat-label>{{ selectLabel }}</mat-label>
+  <mat-select [(value)]="selected" (selectionChange)="onChange($event)" [disabled]="!selectDisabled"><input matInput
+      placeholder="search" #inputSearch />
+    <mat-option *ngFor="let n of listNationality | searchnationality : inputSearch.value"
+      [value]="n.nationality_CODE">{{
+      n.nationality_NAME }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field *ngIf="!selected" appearance="outline">
+  <mat-label>{{ selectLabel }}</mat-label>
+  <mat-select [disabled]="selectDisabled" (focus)="onFocus(selectedNationalityCode)"
+    (selectionChange)="onChange($event)"><input matInput placeholder="search" #inputSearch />
+    <mat-option *ngFor="let n of listNationality | searchnationality : inputSearch.value"
+      [value]="n.nationality_CODE">{{
+      n.nationality_NAME }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

@@ -1,0 +1,7 @@
+<mat-form-field appearance="outline">
+    <mat-label>หน่วย</mat-label>
+    <mat-select [(value)]=selected (selectionChange)="onSelectChange($event.value)">
+        <mat-option *ngFor="let u of unitlist" [value]="u.unit_id">{{u.unit_brief_name}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>

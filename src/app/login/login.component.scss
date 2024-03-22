@@ -1,0 +1,30 @@
+.container {
+
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+
+}
+
+* {
+  font-family: 'Kanit', sans-serif;
+  font-size: 1rem;
+}
+
+.example-card {
+  margin: 0 auto;
+  width: 10%;
+  display: inline-block;
+  vertical-align: middle;
+
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+mat-card {
+  background-color: bg-light;
+}

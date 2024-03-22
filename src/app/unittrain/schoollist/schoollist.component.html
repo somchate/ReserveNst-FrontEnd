@@ -1,0 +1,121 @@
+<div class="container">
+  <div class="container box" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%"
+    fxLayoutAlign="flex-start">
+    <div class="one">
+      <button mat-icon-button color="primary" (click)="addSchool()">
+        <mat-icon>school</mat-icon></button>{{ title }}
+    </div>
+    <div class="push">
+      <app-unittrainlist selected="{{ selectedUnitTrainOutPut }}" selectLabel="หน่วยฝึกวิชาทหาร"
+        (selectChangeValue)="getSelectUnitTrainChangeValue($event)"></app-unittrainlist>
+    </div>
+    <div>
+      <app-provinceslist selected="{{ selectedProvinceOutPut }}" selectDisabled="{{ selectProvinceDisabled }}"
+        selectLabel="จังหวัด" [selectUnitId]="passUnitTrainToProvince"
+        (selectChangeValue)="getSelectProvinceChangeValue($event)"></app-provinceslist>
+    </div>
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>ค้นหา -> ชื่อสถานศึกษาวิชาทหาร</mat-label>
+        <input matInput type="text" [(ngModel)]="filterValue" (input)="findByName(filter.value)"
+          placeholder="Search by name" #filter />
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="container">
+        <form [formGroup]="schoolForm">
+          <div>
+
+            <div class="mat-elevation-z8">
+              <table mat-table [dataSource]="dataSource.content" matSort>
+                <!-- ID Column -->
+                <ng-container matColumnDef="Running">
+                  <th class="text-center" mat-header-cell *matHeaderCellDef mat-sort-header>
+                    ลำดับ
+                  </th>
+                  <td class="text-center" mat-cell *matCellDef="let row; let i = index">
+                    {{ i + 1 + pageIndex * pageSize }}
+                  </td>
+                </ng-container>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="RequestAgency">
+                  <th class="text-center" mat-header-cell *matHeaderCellDef mat-sort-header>
+                    #สถานศึกษา
+                  </th>
+                  <td class="text-center" mat-cell *matCellDef="let row" (click)="openNstForMiUpdateList(row)">
+                    <div style="cursor: hand; cursor: pointer; color:blue">
+                      {{ row.school_ID }}
+                    </div>
+                  </td>
+                </ng-container>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="BookRequestNo">
+                  <th class="text-center" mat-header-cell *matHeaderCellDef mat-sort-header>
+                    ชื่อสถานศึกษาวิชาทหาร
+                  </th>
+                  <td class="text-center" mat-cell *matCellDef="let row">
+                    {{ row.school_NAME }}
+                  </td>
+                </ng-container>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="BookRequestDate">
+                  <th class="text-center" mat-header-cell *matHeaderCellDef mat-sort-header>
+                    จังหวัด
+                  </th>
+                  <td class="text-center" mat-cell *matCellDef="let row">
+                    {{ row.provinces[0].province_NAME }}
+                  </td>
+                </ng-container>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="UnitTrain">
+                  <th class="text-center" mat-header-cell *matHeaderCellDef mat-sort-header>
+                    ศฝ./นฝ.นศท.
+                  </th>
+                  <td class="text-center" mat-cell *matCellDef="let row">
+                    {{
+                    row.provinces[0].unitTrainProvinces[0].unitTrains
+                    .unit_SHORTNAME
+                    }}
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Action">
+                  <th class="text-center" mat-header-cell *matHeaderCellDef mat-sort-header>
+                    บันทึกแล้ว/จำนวน นศท.
+                  </th>
+                  <td class="text-center" mat-cell *matCellDef="let row">
+                    {{ countInputAddrAndAllNst(row) }}
+                  </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+                <!-- Row shown when there is no matching data. -->
+                <tr class="mat-row" *matNoDataRow>
+                  <td class="mat-cell" colspan="4">
+                    No data matching the filter "{{ filter.value }}"
+                  </td>
+                </tr>
+              </table>
+              <!-- <mat-paginator [pageSizeOptions]="[9, 18, 36]" aria-label="Select page of users">
+                            </mat-paginator> -->
+              <app-spinner-standalone [Wait]="loading"></app-spinner-standalone>
+
+              <mat-paginator [hidePageSize]="true" [length]="dataSource.totalElements" [pageSize]="dataSource.size"
+                [pageSizeOptions]="[5, 10, 25, 100]" (page)="pageEvent = $event; onPaginateChange($event)"
+                showFirstLastButtons>
+              </mat-paginator>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

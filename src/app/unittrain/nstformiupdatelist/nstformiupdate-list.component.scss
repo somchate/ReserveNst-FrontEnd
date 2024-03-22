@@ -1,0 +1,103 @@
+:host ::ng-deep .mat-sort-header-container {
+    display: flex;
+    justify-content: center;
+}
+
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+table {
+    width: 100%;
+}
+
+.mat-form-field {
+    font-size: 14px;
+    width: 100%;
+}
+
+.container {
+    max-width: 100%;
+    min-height: 100%;
+    // margin: 10 auto;
+    margin-top: 1%;
+    margin-bottom: 2.5%;
+}
+
+.blue-icon {
+    background-color: rgb(43, 22, 236);
+}
+
+.location-blue-icon {
+    color: #9C27B0
+}
+
+.red-icon {
+    color: red;
+}
+
+.spinner {
+    width: 50px !important;
+    height: 50px;
+    border: 8px solid blue;
+    border-top: 8px solid #fff;
+    margin-left: 50%;
+    border-radius: 50%;
+    animation: load 1s linear infinite;
+}
+
+@keyframes load {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.centre {
+    text-align: center
+}
+
+.text-left {
+    text-align: left !important
+}
+
+.mat-sort-header-container {
+    justify-content: center;
+}
+
+td.mat-cell,
+th.mat-header-cell {
+    text-align: center;
+    justify-content: center;
+}
+
+.box {
+    display: flex;
+
+}
+
+.push {
+
+    margin-left: auto;
+}
+
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+}
+
+.example-full-width {
+    width: 100%;
+}
+
+* {
+    font-family: 'Kanit', sans-serif;
+}
+
+.row {
+    margin-top: -3%;
+}

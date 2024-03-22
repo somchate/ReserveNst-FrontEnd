@@ -1,0 +1,18 @@
+<mat-dialog-content>
+    <div class="container centered-content" style="margin-top: 1rem;">
+        <div>ยืนยันการส่ง/ยกเลิกการส่งหนังสือ</div>
+        <div style="margin-top: 10px">
+            <div style="margin-top: 10px">
+                <div>
+                    <button style="margin-left: 8px" mat-raised-button color="primary"
+                        (click)="ConfirmChangeDocStatus()">
+                        {{btnText}}
+                    </button>
+                    <button style="margin-left: 8px" mat-raised-button color="primary" (click)="onClose()">
+                        ปิด
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</mat-dialog-content>

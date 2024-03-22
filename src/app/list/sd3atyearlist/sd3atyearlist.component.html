@@ -1,0 +1,16 @@
+<mat-form-field *ngIf="selected" appearance="outline" appearance="outline" style="width: 11vw">
+  <mat-label>{{ selectLabel }}</mat-label>
+  <mat-select [(value)]="selected" (selectionChange)="onChange($event)" [disabled]="selectDisabled">
+    <mat-option *ngFor="let y of listOfAtYear" [value]="y">{{ y }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field *ngIf="!selected" appearance="outline" appearance="outline" style="width: 11vw">
+  <mat-label>{{ selectLabel }}</mat-label>
+  <mat-select (selectionChange)="onChange($event) " (focus)="onFocus(selectUnitTrainId,selectUnitId)"
+    [disabled]="selectDisabled">
+    <mat-option *ngFor="let y of listOfAtYear" [value]="y">{{ y }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

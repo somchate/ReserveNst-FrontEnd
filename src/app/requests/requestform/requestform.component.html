@@ -1,0 +1,47 @@
+<div>{{title}}</div>
+<form [formGroup]="requestForm">
+    <div style="margin-top: 10px;">
+        <mat-form-field hidden="true" >
+            <input formControlName="id" maxlength="20" matInput  autocomplete="off">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>หน่วยงานที่ขอตรวจสอบ</mat-label>
+            <input formControlName="agency" maxlength="30" matInput placeholder="หน่วยที่ขอตรวจสอบ" autocomplete="off">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>หนังสือเลขที่</mat-label>
+            <input formControlName="book_no" maxlength="20" matInput placeholder="เลขที่หนังสือ" autocomplete="off">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>หนังสือลงวันที่</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="book_date">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>ผู้ตรวจสอบ</mat-label>
+            <input formControlName="verifier" maxlength="50" matInput placeholder="ผู้ทำการตรวจสอบ" autocomplete="off">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>วันที่ได้รับเอกสาร</mat-label>
+            <input matInput [matDatepicker]="picker1" formControlName="save_date">
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>หมายเหตุ</mat-label>
+            <input formControlName="comment" maxlength="30" matInput placeholder="หมายเหตุ" autocomplete="off">
+        </mat-form-field>
+        <div *ngIf="!isDelete" class="requestForm">
+            <button style="margin-left: 8px;" mat-raised-button color="primary" [disabled]="requestForm.invalid"
+                (click)="addRequest()" (click)="onClear()">{{actionBtn}}</button>
+            <button style="margin-left: 8px;" mat-raised-button color="primary" (click)="onClose()">ปิด</button>
+        </div>
+        <div *ngIf="isDelete" class="requestForm">
+            <button style="margin-left: 8px;" mat-raised-button color="primary" [disabled]="requestForm.invalid"
+                (click)="deleteRequest()" (click)="onClear()">{{actionBtn}}</button>
+            <button style="margin-left: 8px;" mat-raised-button color="primary" (click)="onClose()">ปิด</button>
+        </div>
+    </div>
+</form>

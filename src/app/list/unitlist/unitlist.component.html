@@ -1,0 +1,16 @@
+<mat-form-field *ngIf="selected" appearance="outline" appearance="outline">
+    <mat-label>{{ selectLabel }}</mat-label>
+    <mat-select [(value)]="selected" (selectionChange)="onChange($event)" [disabled]="selectDisabled"><input matInput
+            placeholder="search" #inputSearch />
+        <mat-option *ngFor="let u of listUnits | searchunit : inputSearch.value" [value]="u.id">{{ u.abbrName }}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+
+<mat-form-field *ngIf="!selected" appearance="outline" appearance="outline">
+    <mat-label>{{ selectLabel }}</mat-label>
+    <mat-select (selectionChange)="onChange($event)"><input matInput placeholder="search" #inputSearch />
+        <mat-option *ngFor="let u of listUnits | searchunit : inputSearch.value" [value]="u.id">{{ u.abbrName }}
+        </mat-option>
+    </mat-select>
+</mat-form-field>

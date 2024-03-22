@@ -1,0 +1,19 @@
+<mat-form-field *ngIf="selected" appearance="outline" appearance="outline">
+  <mat-label>{{ selectLabel }}</mat-label>
+  <mat-select [(value)]="selected" (selectionChange)="onChange($event)" (mousedown)="onFocus(getAmphurByProvince)"
+    [disabled]="selectDisabled"><input matInput placeholder="search" #inputSearch />
+    <mat-option *ngFor="let a of listAmphurs | searchAmphur : inputSearch.value" [value]="a.amphur_ID">{{ a.amphur_NAME
+      }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field *ngIf="!selected" appearance="outline" appearance="outline">
+  <mat-label>{{ selectLabel }}</mat-label>
+  <mat-select (focus)="onFocus(getAmphurByProvince)" (selectionChange)="onChange($event)"><input matInput
+      placeholder="search" #inputSearch />
+    <mat-option *ngFor="let a of listAmphurs | searchAmphur : inputSearch.value" [value]="a.amphur_ID">{{ a.amphur_NAME
+      }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

@@ -1,0 +1,372 @@
+<div style="margin: 3% !important">
+  <div>
+    {{ titleNstInfo }}
+    <button mat-icon-button class="close-button" [mat-dialog-close]="true">
+      <mat-icon class="close-icon" color="warn">close</mat-icon>
+    </button>
+  </div>
+  <form [formGroup]="nstFormGroup">
+    <div class="grid">
+      <mat-form-field appearance="outline">
+        <mat-label>ลำดับ รด.25</mat-label>
+        <input formControlName="nstRd25" maxlength="20" matInput placeholder="ลำดับ รด.25" autocomplete="off"
+          readonly />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>#ประชาชน</mat-label>
+        <input formControlName="regPid" maxlength="30" matInput placeholder="#ประชาชน" autocomplete="off" readonly />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>#นศท.</mat-label>
+        <input formControlName="nstId" maxlength="20" matInput placeholder="#นศท." autocomplete="off" readonly />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>#รด.3</mat-label>
+        <input formControlName="rd3No" maxlength="20" matInput placeholder="#รด.3" autocomplete="off" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>#ประจำตัว(สด.3)</mat-label>
+        <input formControlName="toSd3MiSignNo" maxlength="20" matInput placeholder="#ประจำตัว(สด.3)" autocomplete="off"
+          readonly />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>ชื่อ</mat-label>
+        <input formControlName="regFname" maxlength="20" matInput placeholder="ชื่อ" autocomplete="off" readonly />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>นามสกุล</mat-label>
+        <input formControlName="regLname" maxlength="20" matInput placeholder="นามสกุล" autocomplete="off" readonly />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" hidden>
+        <mat-label>สัญชาติ</mat-label>
+        <input [(ngModel)]="selectedNationalityOutPut" formControlName="natId" maxlength="20" matInput
+          placeholder="สัญชาติ" autocomplete="off" />
+      </mat-form-field>
+      <app-nationalitylist selected="{{ selectedNationalityOutPut }}" selectDisabled="{{ nationalitySelectDisable }}"
+        selectLabel="สัญชาติ" (selectChangeValue)="getSelectNationalityChangeValue($event)"></app-nationalitylist>
+      <mat-form-field appearance="outline" hidden>
+        <mat-label>ศาสนา</mat-label>
+        <input [(ngModel)]="selectedReligionOutPut" formControlName="regReligion" maxlength="20" matInput
+          placeholder="ศาสนา" autocomplete="off" />
+      </mat-form-field>
+
+      <app-religionlist selected="{{ selectedReligionOutPut }}" selectDisabled="{{ religionSelectDisable }}"
+        selectLabel="ศาสนา" (selectChangeValue)="getSelectReligionChangeValue($event)"></app-religionlist>
+      <mat-form-field appearance="outline">
+        <mat-label>วัน/เดือน/ปี เกิด</mat-label>
+        <input matInput [matDatepicker]="pickerBirthDay" formControlName="regBirthday" readonly />
+        <mat-datepicker-toggle matSuffix [for]="pickerBirthDay"></mat-datepicker-toggle>
+        <mat-datepicker #pickerBirthDay></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>ชั้นปีที่</mat-label>
+        <input formControlName="nstAtClass" maxlength="20" matInput placeholder="ชั้นปีที่" autocomplete="off"
+          readonly />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>เพศ</mat-label>
+        <input formControlName="regSex" maxlength="20" matInput placeholder="เพศ" autocomplete="off" readonly />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>ปีการศึกษา</mat-label>
+        <input formControlName="atYear" maxlength="20" matInput placeholder="ปีที่สำเร็จวิชาทหาร" autocomplete="off"
+          readonly />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>#สถานศึกษาวิชาทหาร</mat-label>
+        <input formControlName="regSchoolId" maxlength="20" matInput placeholder="#สถานศึกษาวิชาทหาร" autocomplete="off"
+          readonly />
+      </mat-form-field>
+
+
+      <mat-form-field appearance="outline">
+        <mat-label>ชื่อสถานศึกษาวิชาทหาร</mat-label>
+        <input formControlName="regSchoolName" maxlength="20" matInput placeholder="ชื่อสถานศึกษาวิชาทหาร"
+          autocomplete="off" readonly />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>สถานภาพ</mat-label>
+        <input formControlName="nstStatusId" maxlength="50" matInput placeholder="สถานภาพ นศท." autocomplete="off"
+          readonly />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>วัน/เดือน/ปี สำเร็จการฝึกฯ</mat-label>
+        <input matInput [matDatepicker]="pickerApproved" formControlName="nstApproveDate" readonly />
+        <mat-datepicker-toggle matSuffix [for]="pickerApproved"></mat-datepicker-toggle>
+        <mat-datepicker #pickerApproved></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>บ้านเลขที่</mat-label>
+        <input formControlName="regAddress" maxlength="20" matInput placeholder="บ้านเลขที่" autocomplete="off" />
+      </mat-form-field>
+
+      <input [(ngModel)]="selectedProvinceOutPut" formControlName="regProvince" maxlength="30" matInput
+        placeholder="รหัสจังหวัด" autocomplete="off" hidden />
+      <input [(ngModel)]="selectedProvinceNameOutPut" formControlName="regProvinceName" maxlength="30" matInput
+        placeholder="ชื่อจังหวัด" autocomplete="off" hidden />
+      <app-provinceslist selected="{{ selectedProvinceOutPut }}" selectDisabled="{{ provinceSelectDisable }}"
+        selectLabel="จังหวัด" (selectChangeValue)="getSelectProvinceChangeValue($event)"></app-provinceslist>
+
+      <input [(ngModel)]="selectedAmphurOutPut" formControlName="regAmphur" maxlength="20" matInput
+        placeholder="รหัสอำเภอ" autocomplete="off" hidden />
+      <input [(ngModel)]="selectedAmphurNameOutPut" formControlName="regAmphurName" maxlength="20" matInput
+        placeholder="ชื่ออำเภอ" autocomplete="off" hidden />
+      <app-amphurlist selected="{{ selectedAmphurOutPut }}" selectDisabled="{{ amphurSelectDisable }}"
+        selectLabel="อำเภอ" getAmphurByProvince="{{ getAmphurByProvince }}"
+        (selectChangeValue)="getSelectAmphurChangeValue($event)"></app-amphurlist>
+
+      <input [(ngModel)]="selectedDistrictOutPut" formControlName="regDistrict" maxlength="20" matInput
+        placeholder="รหัสตำบล" autocomplete="off" hidden />
+      <input [(ngModel)]="selectedDistrictNameOutPut" formControlName="regDistrictName" maxlength="20" matInput
+        placeholder="ชื่อตำบล" autocomplete="off" hidden />
+      <app-districtlist selected="{{ selectedDistrictOutPut }}" selectDisabled="{{ districtSelectDisable }}"
+        selectLabel="ตำบล" getDistrictsByAmphur="{{ getDistrictsByAmphur }}"
+        (selectChangeValue)="getSelectDistrictChangeValue($event)"></app-districtlist>
+    </div>
+
+    <div>
+      {{ titleMiAddr }}
+      <button style="margin-left: 8px; margin-bottom: 9px" mat-raised-button color="primary" (click)="loadMiInfo()">
+        เชื่อมโยงข้อมูล <-> Recruit 4.0
+      </button>
+    </div>
+
+    <div class="grid">
+      <mat-form-field appearance="outline">
+        <mat-label>สด.9 เลขที่</mat-label>
+        <input formControlName="sd9No" maxlength="20" matInput placeholder="สด.9 เลขที่" autocomplete="off" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>บ้านเลขที่-ภูมิลำเนาทหาร</mat-label>
+        <input formControlName="regArmyAddress" maxlength="20" matInput placeholder="บ้านเลขที่-ภูมิลำเนาทหาร"
+          autocomplete="off" />
+      </mat-form-field>
+
+      <input [(ngModel)]="selectedArmyProvinceOutPut" formControlName="regArmyProvince" maxlength="30" matInput
+        placeholder="รหัสจังหวัด-ภูมิลำเนาทหาร" autocomplete="off" hidden />
+      <input [(ngModel)]="selectedArmyProvinceNameOutPut" formControlName="regArmyProvinceName" maxlength="30" matInput
+        placeholder="ชื่อจังหวัด-ภูมิลำเนาทหาร" autocomplete="off" hidden />
+      <app-provinceslist selected="{{ selectedArmyProvinceOutPut }}" selectDisabled="{{ provinceArmySelectDisable }}"
+        selectLabel="จังหวัด-ภูมิลำเนาทหาร"
+        (selectChangeValue)="getSelectArmyProvinceChangeValue($event)"></app-provinceslist>
+
+      <input [(ngModel)]="selectedArmyAmphurOutPut" formControlName="regArmyAmphur" maxlength="20" matInput
+        placeholder="รหัสอำเภอ-ภูมิลำเนาทหาร" autocomplete="off" hidden />
+      <input [(ngModel)]="selectedArmyAmphurNameOutPut" formControlName="regArmyAmphurName" maxlength="20" matInput
+        placeholder="ชื่ออำเภอ-ภูมิลำเนาทหาร" autocomplete="off" hidden />
+      <app-amphurlist selected="{{ selectedArmyAmphurOutPut }}" selectDisabled="{{ amphurArmySelectDisable }}"
+        selectLabel="อำเภอ-ภูมิลำเนาทหาร" getAmphurByProvince="{{ getAmphurArmyByProvinceArmy }}"
+        (selectChangeValue)="getSelectArmyAmphurChangeValue($event)"></app-amphurlist>
+
+      <input [(ngModel)]="selectedArmyDistrictOutPut" formControlName="regArmyDistrict" maxlength="20" matInput
+        placeholder="รหัสตำบล-ภูมิลำเนาทหาร" autocomplete="off" hidden />
+      <input [(ngModel)]="selectedArmyDistrictNameOutPut" formControlName="regArmyDistrictName" maxlength="20" matInput
+        placeholder="ชื่อตำบล-ภูมิลำเนาทหาร" autocomplete="off" hidden />
+      <app-districtlist selected="{{ selectedArmyDistrictOutPut }}" selectDisabled="{{ districtArmySelectDisable }}"
+        selectLabel="ตำบล-ภูมิลำเนาทหาร" getDistrictsByAmphur="{{ getDistrictsArmyByAmphurArmy }}"
+        (selectChangeValue)="getSelectArmyDistrictChangeValue($event)"></app-districtlist>
+
+      <mat-form-field appearance="outline">
+        <mat-label>ส่วนสูง(ซม.)</mat-label>
+        <input formControlName="regHeight" maxlength="20" matInput placeholder="ส่วนสูง" autocomplete="off" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>รอบตัว(ซม.) </mat-label>
+        <input formControlName="regAround" maxlength="20" matInput placeholder="รอบตัว" autocomplete="off" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>ตำหนิสำคัญ</mat-label>
+        <input formControlName="toSd3Scar" maxlength="20" matInput placeholder="ตำหนิสำคัญ" autocomplete="off" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>ชื่อ-นามสกุล บิดา</mat-label>
+        <input formControlName="fatherName" maxlength="20" matInput placeholder="ชื่อ-นามสกุล บิดา"
+          autocomplete="off" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" hidden>
+        <mat-label>สัญชาติบิดา</mat-label>
+        <input [(ngModel)]="selectedFatherNatOutPut" formControlName="regFNat" maxlength="20" matInput
+          placeholder="สัญชาติบิดา" autocomplete="off" />
+      </mat-form-field>
+
+      <app-nationalitylist selected="{{ selectedFatherNatOutPut }}" selectDisabled="{{ nationalitySelectDisable }}"
+        selectLabel="สัญชาติบิดา"
+        (selectChangeValue)="getSelectFatherNationalityChangeValue($event)"></app-nationalitylist>
+
+      <mat-form-field appearance="outline">
+        <mat-label>บิดาประกอบอาชีพ</mat-label>
+        <input formControlName="fatherCareer" maxlength="20" matInput placeholder="อาชีพบิดา" autocomplete="off" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>ชื่อ-นามสกุล มารดา</mat-label>
+        <input formControlName="motherName" maxlength="20" matInput placeholder="ชื่อ-นามสกุล มารดา"
+          autocomplete="off" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>มารดาประกอบอาชีพ</mat-label>
+        <input formControlName="motherCareer" maxlength="20" matInput placeholder="อาชีพมารดา" autocomplete="off" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>ชื่อ-นามสกุล ภรรยา</mat-label>
+        <input formControlName="wifeName" maxlength="20" matInput placeholder="ชื่อ-นามสกุล ภรรยา" autocomplete="off" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>ชื่อ-นามสกุล ปู่</mat-label>
+        <input formControlName="grandFatherName" maxlength="20" matInput placeholder="ชื่อ-นามสกุล ปู่"
+          autocomplete="off" />
+      </mat-form-field>
+
+      <!-- <mat-form-field appearance="outline">
+        <mat-label>รหัสสัญชาติปู่</mat-label>
+        <input formControlName="grandFatherNatId" maxlength="20" matInput placeholder="รหัสสัญชาติปู่"
+          autocomplete="off" />
+      </mat-form-field> -->
+
+      <mat-form-field appearance="outline" hidden>
+        <mat-label>สัญชาติปู่</mat-label>
+        <input [(ngModel)]="selectedGrandFatherNatOutPut" formControlName="grandFatherNatId" maxlength="20" matInput
+          placeholder="สัญชาติปู่" autocomplete="off" />
+      </mat-form-field>
+
+      <app-nationalitylist selected="{{ selectedGrandFatherNatOutPut }}" selectDisabled="{{ nationalitySelectDisable }}"
+        selectLabel="สัญชาติปู่"
+        (selectChangeValue)="getSelectGrandFatherNationalityChangeValue($event)"></app-nationalitylist>
+    </div>
+
+    <div style="margin-left: 8px; margin-bottom: 9px">
+      {{ titleMiRegister }}
+    </div>
+    <div>
+      <mat-form-field appearance="outline" hidden>
+        <mat-label>สาเหตุการขึ้นทะบียนฯ</mat-label>
+        <input [(ngModel)]="selectedSd3ReasonOutPut" formControlName="toSd3ReasonId" matInput
+          placeholder="สาเหตุการขึ้นทะบียนฯ" autocomplete="off" />
+      </mat-form-field>
+      <app-sd3reasonlist selected="{{ selectedSd3ReasonOutPut }}" selectDisabled="{{ sd3ReasonSelectDisable }}"
+        selectLabel="สาเหตุการขึ้นทะบียนฯ"
+        (selectChangeValue)="getSelectSd3ReasonChangeValue($event)"></app-sd3reasonlist>
+
+    </div>
+    <div class="grid">
+
+
+      <mat-form-field appearance="outline">
+        <mat-label>ชุดที่</mat-label>
+        <input formControlName="toSd3" maxlength="20" matInput placeholder="ชุดที่นำตัวขึ้นทะเบียนฯ"
+          autocomplete="off" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" hidden>
+        <mat-label>รู้วิชา(พลเรือน)</mat-label>
+        <input [(ngModel)]="selectedKnowledgeOutPut" formControlName="toSd3Edu" maxlength="20" matInput
+          placeholder="รู้วิชา(พลเรือน)" autocomplete="off" />
+      </mat-form-field>
+
+      <app-knowledgelist selected="{{ selectedKnowledgeOutPut }}" selectDisabled="{{ knowledgeSelectDisable }}"
+        selectLabel="รู้วิชา(พลเรือน)" (selectChangeValue)="getSelectKnowledgeChangeValue($event)"></app-knowledgelist>
+      <mat-form-field appearance="outline">
+        <mat-label>วัน/เดือน/ปี นำตัวขึ้นทะเบียนฯ</mat-label>
+        <input matInput [matDatepicker]="pickerSaveDate" formControlName="toSd3SaveDate" />
+        <mat-datepicker-toggle matSuffix [for]="pickerSaveDate"></mat-datepicker-toggle>
+        <mat-datepicker #pickerSaveDate></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field appearance="outline" hidden>
+        <mat-label>สังกัด มทบ.</mat-label>
+        <input [(ngModel)]="selectedMilitaryCircleOutPut" formControlName="reserveMiCircle" maxlength="20" matInput
+          placeholder="สังกัด มทบ." autocomplete="off" />
+      </mat-form-field>
+      <app-militarycirclelist selected="{{ selectedMilitaryCircleOutPut }}"
+        selectDisabled="{{ militaryCircleSelectDisable }}" selectLabel="สังกัด มทบ."
+        (selectChangeValue)="getSelectMilitaryCircleChangeValue($event)"></app-militarycirclelist>
+
+      <mat-form-field appearance="outline" hidden>
+        <mat-label>เหล่า</mat-label>
+        <input [(ngModel)]="selectedCorpsOutPut" formControlName="toSd3MiCorps" maxlength="20" matInput
+          placeholder="เหล่า" autocomplete="off" />
+      </mat-form-field>
+
+      <app-corpslist selected="{{ selectedCorpsOutPut }}" selectDisabled="{{ corpsSelectDisable }}" selectLabel="เหล่า"
+        (selectChangeValue)="getSelectCorpsChangeValue($event)"></app-corpslist>
+      <mat-form-field appearance="outline" hidden>
+        <mat-label>แผนก</mat-label>
+        <input [(ngModel)]="selectedDepartmentOutPut" formControlName="toSd3MiDept" maxlength="20" matInput
+          placeholder="แผนก" autocomplete="off" />
+      </mat-form-field>
+
+      <app-departmentlist selected="{{ selectedDepartmentOutPut }}" selectDisabled="{{ departmentSelectDisable }}"
+        selectLabel="แผนก" (selectChangeValue)="getSelectDepartmentChangeValue($event)"></app-departmentlist>
+
+      <mat-form-field appearance="outline">
+        <mat-label>ปีที่นำตัวขึ้นทะเบียนฯ</mat-label>
+        <input formControlName="toSd3AtYear" maxlength="20" matInput placeholder="ปีที่นำตัวขึ้นทะเบียนฯ"
+          autocomplete="off" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>เลขทะเบียนทหาร 5 หลัก</mat-label>
+        <input formControlName="toSd3MiSignNo" maxlength="20" matInput placeholder="เลขประจำตัวทหาร"
+          autocomplete="off" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" hidden>
+        <mat-label>ปลดเป็นกองหนุนประเภท</mat-label>
+        <input [(ngModel)]="selectedReserveTypeOutPut" formControlName="reserveType" matInput
+          placeholder="ปลดเป็นกองหนุนประเภท" autocomplete="off" />
+      </mat-form-field>
+      <app-reservetypelist selected="{{ selectedReserveTypeOutPut }}" selectDisabled="{{ reserveTypeSelectDisable }}"
+        selectLabel="ปลดเป็นกองหนุนประเภท"
+        (selectChangeValue)="getSelectReserveTypeChangeValue($event)"></app-reservetypelist>
+
+      <!-- <input [(ngModel)]="dateToMiSignNo" matInput [matDatepicker]="pickerSaveDate" formControlName="toSd3SaveDate" /> -->
+
+      <mat-form-field appearance="outline">
+        <mat-label>หมายเหตุ</mat-label>
+        <input formControlName="regArmyNote" maxlength="30" matInput placeholder="บันทึกหมายเหตุ" autocomplete="off" />
+      </mat-form-field>
+    </div>
+  </form>
+
+  <div>
+    <button style="margin-left: 8px" mat-raised-button color="primary"
+      [disabled]="nstFormGroup.invalid || !isSaveBtn || toSd3DocId" (click)="updateNstMiINfo(nstFormGroup.value)">
+      บันทึก
+    </button>
+    <button style="margin-left: 8px" mat-raised-button color="warn" [disabled]="!isEditBtn" (click)="updateCheckIn()">
+      บันทึกการแก้ไข
+    </button>
+    <button style="margin-left: 8px" mat-raised-button color="warn" [disabled]="!isDeleteBtn" (click)="deleteCheckIn()">
+      ยืนยันการลบ
+    </button>
+    <button style="margin-left: 8px" mat-raised-button color="primary" (click)="onClose()">
+      ปิด
+    </button>
+  </div>
+</div>
+
+@defer () {} @placeholder(minimum 1000ms) {
+
+<div class="overlay">
+  <app-spinner-standalone [Wait]="true" />
+</div>
+}

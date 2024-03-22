@@ -1,0 +1,163 @@
+<div class="dialog-container">
+  <div>{{ title }}</div>
+  <form [formGroup]="resultDetailForm">
+    <div style="margin-top: 5px">
+      <mat-form-field appearance="outline">
+        <mat-label>รหัสลำดับการขอตรวจสอบ</mat-label>
+        <input formControlName="request_id" maxlength="20" matInput placeholder="รหัสลำดับการขอตรวจสอบ"
+          autocomplete="off" readonly />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>หน่วยงานขอตรวจสอบ</mat-label>
+        <input formControlName="agency" maxlength="30" matInput placeholder="หน่วยที่ขอตรวจสอบ" autocomplete="off"
+          readonly />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>เลขที่หนังสือ</mat-label>
+        <input formControlName="book_no" maxlength="20" matInput placeholder="เลขที่หนังสือ" autocomplete="off"
+          readonly />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>ลงวันที่</mat-label>
+        <input matInput [matDatepicker]="pickerBook" formControlName="book_date" />
+        <mat-datepicker-toggle matSuffix [for]="pickerBook"></mat-datepicker-toggle>
+        <mat-datepicker #pickerBook></mat-datepicker>
+      </mat-form-field>
+      <div>ข้อมูลทหารกองเกิน</div>
+      <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>เลขประจำตัวประชาชน</mat-label>
+        <input formControlName="citizen_id" maxlength="30" matInput placeholder="เลขประจำตัวประชาชน" autocomplete="off"
+          readonly />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>คำนำหน้า</mat-label>
+        <input formControlName="pre_name" maxlength="30" matInput placeholder="คำนำหน้า" autocomplete="off" readonly />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>ชื่อ</mat-label>
+        <input formControlName="first_name" maxlength="30" matInput placeholder="ชื่อ" autocomplete="off" readonly />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>นามสกุล</mat-label>
+        <input formControlName="last_name" maxlength="30" matInput placeholder="นามสกุล" autocomplete="off" readonly />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>วัน/เดือน/ปี พ.ศ.เกิด</mat-label>
+        <input matInput [matDatepicker]="pickerBirth" formControlName="dob" readonly>
+        <mat-datepicker-toggle matSuffix [for]="pickerBirth"></mat-datepicker-toggle>
+        <mat-datepicker #pickerBirth disabled></mat-datepicker>
+      </mat-form-field>
+
+      <!-- <div>ภูมิลำเนาทหาร</div> -->
+      <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>ตำบล-ภูมิลำเนาทหาร</mat-label>
+        <input formControlName="mi_district" maxlength="30" matInput placeholder="ตำบล" autocomplete="off"
+          readonly="" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>อำเภอ-ภูมิลำเนาทหาร</mat-label>
+        <input formControlName="mi_amphoe" maxlength="30" matInput placeholder="อำเภอ" autocomplete="off" readonly="" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>จังหวัด-ภูมิลำเนาทหาร</mat-label>
+        <input formControlName="mi_province" maxlength="30" matInput placeholder="จังหวัด" autocomplete="off"
+          readonly />
+      </mat-form-field>
+      <div>ผลการตรวจเลือกฯ/จับสลาก</div>
+      <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>ปีตรวจเลือก พ.ศ.</mat-label>
+        <input formControlName="result_year" maxlength="4" matInput placeholder="ปีตรวจเลือก พ.ศ." autocomplete="off"
+          readonly />
+        <!-- <input matInput [matDatepicker]="picker1" formControlName="result_year">                        
+                            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                            <mat-datepicker #picker1></mat-datepicker> -->
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>สด.43 ฉบับที่</mat-label>
+        <input formControlName="issue_no" maxlength="30" matInput placeholder="สด.43 ฉบับที่" autocomplete="off"
+          readonly />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>เลขที่หมายเรียก</mat-label>
+        <input formControlName="order_no" maxlength="30" matInput placeholder="เลขที่หมายเรียก" autocomplete="off" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>ผลการตรวจเลือกฯ/จับสลาก</mat-label>
+        <input formControlName="result_mean" maxlength="30" matInput placeholder="ผลการตรวจเลือกฯ/จับสลาก"
+          autocomplete="off" readonly />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="example-full-width" hidden>
+        <mat-label>ส่วนสูง(cm.)</mat-label>
+        <input formControlName="height" maxlength="30" matInput placeholder="ขนาดสูง(cm.)" autocomplete="off"
+          readonly />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="example-full-width" hidden>
+        <mat-label>รอบตัวหายใจออก/เข้า(cm.)</mat-label>
+        <input formControlName="chest" maxlength="30" matInput placeholder="รอบตัวหายใจออก/เข้า(cm.)" autocomplete="off"
+          readonly />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="example-full-width" hidden>
+        <mat-label>น้ำหนัก</mat-label>
+        <input formControlName="weight" maxlength="30" matInput placeholder="น้ำหนัก" autocomplete="off" readonly />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>บันทึกอื่นๆ</mat-label>
+        <input formControlName="description" maxlength="30" matInput placeholder="หมายเหตุ" autocomplete="off"
+          readonly />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>ผลการตรวจสอบ</mat-label>
+        <mat-select>
+          <mat-option value="volvo">Volvo</mat-option>
+          <mat-option value="volvo">Volvo</mat-option>
+          <mat-option value="volvo">Volvo</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="example-full-width" style="width:400px !important">
+        <mat-label>หมายเหตุ</mat-label>
+        <input formControlName="result_comment" maxlength="100" matInput placeholder="หมายเหตุ"
+          autocomplete="offหมายเหตุ" autocomplete="off" />
+      </mat-form-field>
+      <div>หมายเหตุ: ผลการตรวจสอบใบรับรองผลการตรวจเลือกฯ (แบบ สด.43)</div>
+      <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>วันทำการตรวจสอบ</mat-label>
+        <input matInput [matDatepicker]="pickerVerify" formControlName="verify_date" readonly>
+        <mat-datepicker-toggle matSuffix [for]="pickerVerify"></mat-datepicker-toggle>
+        <mat-datepicker #pickerVerify disabled></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="example-full-width" hidden>
+        <mat-label>รหัสผลการตรวจสอบ</mat-label>
+        <input formControlName="id" maxlength="30" matInput placeholder="รหัสผลการตรวจสอบ" autocomplete="off"
+          readonly />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>ผลการตรวจสอบ</mat-label>
+        <mat-select>
+          <mat-option value="volvo">Volvo</mat-option>
+          <mat-option value="volvo">Volvo</mat-option>
+          <mat-option value="volvo">Volvo</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="example-full-width" style="width:400px !important">
+        <mat-label>หมายเหตุ</mat-label>
+        <input formControlName="result_comment" maxlength="100" matInput placeholder="หมายเหตุ"
+          autocomplete="offหมายเหตุ" autocomplete="off" />
+      </mat-form-field>
+      <div>
+        <button style="margin-left: 8px" mat-raised-button color="primary" [disabled]="resultDetailForm.invalid"
+          [disabled]=isSaveDisable (click)="updateResult()">บันทึก
+        </button>
+        <button style="margin-left: 8px" mat-raised-button color="warn" [disabled]="resultDetailForm.invalid"
+          [disabled]=!isEditBtn (click)="updateResult()">บันทึกการแก้ไข
+        </button>
+        <button style="margin-left: 8px" mat-raised-button color="warn" [disabled]="resultDetailForm.invalid"
+          [disabled]=!isDeleteBtn (click)="deleteApproved()">ยืนยันการลบ
+        </button>
+        <button style="margin-left: 8px" mat-raised-button color="primary" (click)="onClose()">ปิด
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

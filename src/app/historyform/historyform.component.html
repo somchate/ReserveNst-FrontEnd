@@ -1,0 +1,46 @@
+<div>เพิ่มรายการรหัสงบประมาณ</div>
+        <form [formGroup]="historyForm">
+            <div style="margin-top: 10px;">
+              
+                    <mat-form-field appearance="outline">
+                        <mat-label>รหัสประวัติงบประมาณ</mat-label>
+                        <input formControlName="history_id"  maxlength="10" matInput
+                            placeholder="รหัสประวัติงบประมาณ" autocomplete="off" (keypress)="keyPressNumbers($event)">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>ประเภทงบประมาณ</mat-label>
+                        <mat-select formControlName="history_type_id" disableRipple>
+                            <mat-option *ngFor="let t of typebudgetlist" [value]="t.type_id">{{t.type_name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>หน่วย</mat-label>
+                        <mat-select formControlName="history_unit_id" disableRipple>
+                            <mat-option *ngFor="let u of unitlist" [value]="u.unit_id">{{u.unit_brief_name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>ปีงบประมาณ</mat-label>
+                        <input formControlName="history_budget_year"  maxlength="4" matInput
+                            placeholder="ปีงบประมาณ" autocomplete="off" (keypress)="keyPressNumbers($event)">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>รหัสงบประมาณ</mat-label>
+                        <input formControlName="history_withdraw_id" maxlength="20" matInput
+                            placeholder="รหัสงบประมาณ" autocomplete="off" (keypress)="keyPressNumbers($event)">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>หมายเหตุ</mat-label>
+                        <input formControlName="history_withdraw_id" maxlength="20" matInput
+                            placeholder="หมายเหตุ" autocomplete="off">
+                    </mat-form-field>
+                    <div class="historyForm">
+                        <button style="margin-left: 8px;" mat-raised-button color="primary"
+                            [disabled]="historyForm.invalid" (click)="addHistory()"
+                            (click)="onClear()">{{actionBtn}}</button>
+                    </div>
+             
+            </div>
+        </form>

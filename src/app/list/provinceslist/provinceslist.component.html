@@ -1,0 +1,25 @@
+@if(selected){
+<mat-form-field appearance="outline">
+  <mat-label>{{ selectLabel }}</mat-label>
+  <mat-select [(value)]="selected" (selectionChange)="onChange($event)" [disabled]="!selectDisabled"><input matInput
+      placeholder="search" #inputSearch />
+    @for(p of listProvinces | searchprovince : inputSearch.value; track p.province_CID){
+    <mat-option class="mat-select-content" [value]="p.province_CID">{{
+      p.province_NAME }}
+    </mat-option>
+    }
+  </mat-select>
+</mat-form-field>
+} @else {
+<mat-form-field appearance="outline">
+  <mat-label>{{ selectLabel }}</mat-label>
+  <mat-select [disabled]="selectDisabled" (focus)="onFocus(selectUnitId)" (selectionChange)="onChange($event)"><input
+      matInput placeholder="search" #inputSearch />
+    @for(p of listProvinces | searchprovince : inputSearch.value; track p.province_CID) {
+    <mat-option class="mat-select-content" [value]="p.province_CID">{{
+      p.province_NAME }}
+    </mat-option>
+    }
+  </mat-select>
+</mat-form-field>
+}

@@ -1,0 +1,55 @@
+<mat-toolbar color="primary">
+  <img src="..\assets\images\tdc.png" alt="" width="40" />
+  <h1 style="font-size: 1.1vw; font-family: 'kanit', sans-serif">
+    {{ title }}
+  </h1>
+  <span class="example-spacer"></span>
+  <mat-icon [matMenuTriggerFor]="animals"> dashboard</mat-icon>
+  <mat-menu #animals="matMenu">
+    <button mat-menu-item [matMenuTriggerFor]="vertebrates">
+      การตรวจสอบ สด.43
+    </button>
+    <button mat-menu-item [matMenuTriggerFor]="invertebrates">
+      ข้อมูลผลการตรวจเลือกฯ
+    </button>
+    <button mat-menu-item>การจัดพิมพ์เอกสาร</button>
+    <button mat-menu-item>เกี่ยวกับโปรแกรม</button>
+  </mat-menu>
+  <mat-menu #vertebrates="matMenu">
+    <button mat-menu-item (click)="openRequest()">รายการขอตรวจสอบ</button>
+    <button mat-menu-item (click)="openRequestCreateDialog()">
+      ผลการตรวจสอบขั้นต้น
+    </button>
+    <button mat-menu-item (click)="openRequestCreateDialog()">
+      ผลการตรวจสอบจากระบบฐานข้อมูล
+    </button>
+  </mat-menu>
+
+  <mat-menu #invertebrates="matMenu">
+    <button mat-menu-item (click)="openVerifyByName()">
+      ค้นหาตามชื่อ-สกุล
+    </button>
+    <button mat-menu-item (click)="openVerifyByCid()">
+      ค้นหาตามเลขประจำตัวประชาชน
+    </button>
+  </mat-menu>
+  <div>
+    <button mat-icon-button class="example-icon" (click)="homeBtn()" onclick="this.blur();">
+      <mat-icon aria-hidden="false" aria-label="Home" fontIcon="pin_drop"></mat-icon>
+    </button>
+    <button mat-icon-button class="example-icon" (click)="openNstDocumenttList()" onclick="this.blur();">
+      <mat-icon aria-hidden="false" aria-label="Group_add" fontIcon="post_add"></mat-icon>
+    </button>
+    <button mat-icon-button class="example-icon" (click)="openDocumentForUnitList()" onclick="this.blur();">
+      <mat-icon aria-hidden="false" aria-label="Group_add" fontIcon="grading"></mat-icon>
+    </button>
+
+    <button mat-icon-button class="example-icon" (click)="refreshBtn()" onclick="this.blur();">
+      <mat-icon aria-hidden="false" aria-label="Refresh" fontIcon="refresh"></mat-icon>
+    </button>
+    <button disabled="{{ isdisable }}" mat-icon-button class="example-icon"
+      aria-label="Example icon-button with share icon" (click)="logout()">
+      <mat-icon>logout</mat-icon>
+    </button>
+  </div>
+</mat-toolbar>

@@ -1,0 +1,178 @@
+<div>{{title}}</div>
+<div class="container" style="margin-top:6rem; padding-left:0px;">
+    <form [formGroup]="requestForm">
+        <mat-form-field appearance="outline">
+            <mat-label>รหัสการขอตรวจสอบข้อมูล</mat-label>
+            <input formControlName="id" maxlength="45" matInput placeholder="" autocomplete="off">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>หน่วยงานที่ขอตรวจสอบ</mat-label>
+            <input formControlName="agency" maxlength="45" matInput placeholder="" autocomplete="off">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>เลขที่หนังสือ</mat-label>
+            <input formControlName="book_no" maxlength="20" matInput placeholder="เลขที่หนังสือ" autocomplete="off"
+                matInput placeholder="" autocomplete="off">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>หนังสือลงวันที่</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="book_date">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+    </form>
+    <mat-form-field >
+        <mat-label>ค้นหาข้อมูล</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Search" #input>
+    </mat-form-field>
+    <div style="padding: 10px; float: right;">
+        <button [disabled]="isSaveDisable" style="margin-right: 8px;" mat-raised-button color="primary"
+            (click)="onClear()">Clear</button>
+        <button [disabled]="isSaveDisable" style="margin-right: 8px;" mat-raised-button color="accent"
+            (click)="showResultDetail()">รายละเอียด</button>
+        <button [disabled]="isSaveDisable" style="margin-right: 8px;" mat-raised-button color="accent"
+            (click)="showResultEdit()">แก้ไข</button>
+        <button [disabled]="isSaveDisable" style="margin-right: 8px;" mat-raised-button color="warn"
+            (click)="showResultDelete()">ลบ</button>
+        <!-- <button style="margin-right: 8px;" mat-raised-button color="primary" 
+            (click)="onClose()">ปิด</button> -->
+    </div>
+
+<div class="containner">
+
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
+
+    <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef>เลือก</th>
+        <td mat-cell *matCellDef="let row">
+            <mat-checkbox [disabled]="!isButtonEnable"
+                (click)="$event.stopPropagation(); onCheckClick(row, requestForm);"
+                (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)">
+            </mat-checkbox>
+        </td>
+    </ng-container>
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="citizen_id">
+        <th mat-header-cell *matHeaderCellDef>#ประชาชน</th>
+        <td mat-cell *matCellDef="let element">{{element.citizen_id}}</td>
+    </ng-container>
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="pre_name">
+        <th mat-header-cell *matHeaderCellDef>#คำนำหน้า</th>
+        <td mat-cell *matCellDef="let element">{{element.pre_name}}</td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="first_name">
+        <th mat-header-cell *matHeaderCellDef>ชื่อตัว</th>
+        <td mat-cell *matCellDef="let element">{{element.first_name}}</td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="last_name">
+        <th mat-header-cell *matHeaderCellDef>นามสกุล</th>
+        <td mat-cell *matCellDef="let element">{{element.last_name}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="dob">
+        <th mat-header-cell *matHeaderCellDef>วัน/เดือน/ปี เกิด</th>
+        <td mat-cell *matCellDef="let element">{{element.dob | thdate}}</td>
+    </ng-container>
+
+    
+    <!-- <ng-container matColumnDef="mi_district">
+        <th mat-header-cell *matHeaderCellDef>ตำบล</th>
+        <td mat-cell *matCellDef="let element">{{element.mi_district}}</td>
+    </ng-container> -->
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="mi_amphoe">
+        <th mat-header-cell *matHeaderCellDef>อำเภอ</th>
+        <td mat-cell *matCellDef="let element">{{element.mi_amphoe}}</td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="mi_province">
+        <th mat-header-cell *matHeaderCellDef>จังหวัด</th>
+        <td mat-cell *matCellDef="let element">{{element.mi_province}}</td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="result_year">
+        <th mat-header-cell *matHeaderCellDef>ปีตรวจเลือกฯ</th>
+        <td mat-cell *matCellDef="let element">{{element.result_year}}</td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="issue_no">
+        <th mat-header-cell *matHeaderCellDef>#สด.43</th>
+        <td mat-cell *matCellDef="let element">{{element.issue_no}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="order_no">
+        <th mat-header-cell *matHeaderCellDef>#หมายเรียก</th>
+        <td mat-cell *matCellDef="let element">{{element.order_no}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="height">
+        <th mat-header-cell *matHeaderCellDef>ส่วนสูง</th>
+        <td mat-cell *matCellDef="let element">{{element.height}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="chest">
+        <th mat-header-cell *matHeaderCellDef>รอบตัว</th>
+        <td mat-cell *matCellDef="let element">{{element.chest}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="weight">
+        <th mat-header-cell *matHeaderCellDef>น้ำหนัก</th>
+        <td mat-cell *matCellDef="let element">{{element.weight}}</td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="result_mean">
+        <th mat-header-cell *matHeaderCellDef>ผลการตรวจเลือกฯ</th>
+        <td mat-cell *matCellDef="let element">{{element.result_mean}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="result_comment">
+        <th mat-header-cell *matHeaderCellDef>หมายเหตุ</th>
+        <td mat-cell *matCellDef="let element">{{element.result_comment}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="print">
+        <th mat-header-cell *matHeaderCellDef>พิมพ์</th>        
+        <td mat-cell *matCellDef="let element">
+            <button mat-icon-button color="primary" (click)="getCheck43Report(element.id)">
+            <mat-icon >print</mat-icon></button></td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row (click)="clickedRows.add(row)" [class.demo-row-is-clicked]="clickedRows.has(row)"
+        *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+</div>
+
+<div style="padding: 10px; padding-top:2rem; float: right;">
+    <button [disabled]="isSaveDisable" style="margin-right: 8px;" mat-raised-button color="primary"
+        (click)="onClear()">Clear</button>
+    <button [disabled]="isSaveDisable" style="margin-right: 8px;" mat-raised-button color="accent"
+        (click)="showResultDetail()">รายละเอียด</button>
+    <button [disabled]="isSaveDisable" style="margin-right: 8px;" mat-raised-button color="accent"
+        (click)="showResultEdit()">แก้ไข</button>
+    <button [disabled]="isSaveDisable" style="margin-right: 8px;" mat-raised-button color="warn"
+        (click)="showResultDelete()">ลบ</button>
+    <!-- <button style="margin-right: 8px;" mat-raised-button color="primary" 
+        (click)="onClose()">ปิด</button> -->
+</div>
+</div>
+    
+
+<!-- <ul>
+    <li *ngFor="let clickedRow of clickedRows">
+        Clicked on {{clickedRow.result_year}}
+    </li>
+</ul> -->

@@ -1,0 +1,31 @@
+<mat-form-field
+  *ngIf="selected"
+  appearance="outline"
+  appearance="outline"
+  style="width: 11vw"
+>
+  <mat-label>{{ selectLabed }}</mat-label>
+  <mat-select
+    [(value)]="listProvinces[selected - 1].id"
+    (selectionChange)="onChange($event)"
+    [disabled]="selectDisabled"
+  >
+    <mat-option *ngFor="let p of listProvinces" [value]="p.id"
+      >{{ p.name_th }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field
+  *ngIf="!selected"
+  appearance="outline"
+  appearance="outline"
+  style="width: 11vw"
+>
+  <mat-label>{{ selectLabed }}</mat-label>
+  <mat-select (selectionChange)="onChange($event)">
+    <mat-option *ngFor="let p of listProvinces" [value]="p.id"
+      >{{ p.name_th }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
