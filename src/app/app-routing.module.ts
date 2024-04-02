@@ -13,7 +13,7 @@ import { ApprovedlistComponent } from './approves/approvedlist/approvedlist.comp
 import { VerifybynameComponent } from './verifies/verifybyname/verifybyname.component';
 import { VerifybycidComponent } from './verifies/verifybycid/verifybycid.component';
 import { SchoollistComponent } from './unittrain/schoollist/schoollist.component';
-import { NstformiupdatelistComponent } from './unittrain/nstformiupdatelist/nstformiupdate-list.component';
+import { NstformiupdatelistComponent } from './unittrain/nstformiupdate-list/nstformiupdate-list.component';
 import { SetListComponent } from './list/set-list/set-list.component';
 import { DocumentforunittrainListComponent } from './unittrain/documentforunittrain-list/documentforunittrain-list.component';
 import { RegisterdoclistComponent } from './recruits/registerdoc-list/registerdoc-list.component';

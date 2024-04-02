@@ -1,27 +1,27 @@
 <div class="container centered-content" style="margin-top: 1rem;">
   <div>{{ title }}</div>
-  <form [formGroup]="reportForm">
+  <!-- <form [formGroup]="reportForm"> -->
+  <div style="margin-top: 10px">
+    <mat-form-field hidden="true">
+      <input formControlName="requestid" maxlength="20" matInput autocomplete="off" />
+    </mat-form-field>
     <div style="margin-top: 10px">
-      <mat-form-field hidden="true">
-        <input formControlName="requestid" maxlength="20" matInput autocomplete="off" />
-      </mat-form-field>
-      <div style="margin-top: 10px">
-        <div>
-          @if(reportType=='sd3'){
-          <button style="margin-left: 8px" mat-raised-button color="primary" (click)="downloadSd3File()">
-            {{btnText}}
-          </button>
-          }
-          @if(reportType=='sd42') {
-          <button style="margin-left: 8px" mat-raised-button color="primary" (click)="downloadSd42File()">
-            พิมพ์ สด.42
-          </button>
-          }
-          <button style="margin-left: 8px" mat-raised-button color="primary" (click)="onClose()">
-            ปิด
-          </button>
-        </div>
+      <div>
+        @if(reportType=='sd3'){
+        <button style="margin-left: 8px" mat-raised-button color="primary" (click)="downloadSd3File()">
+          {{btnText}}
+        </button>
+        }
+        @if(reportType=='sd42') {
+        <button style="margin-left: 8px" mat-raised-button color="primary" (click)="downloadSd42File()">
+          พิมพ์ สด.42
+        </button>
+        }
+        <button style="margin-left: 8px" mat-raised-button color="primary" (click)="onClose()">
+          ปิด
+        </button>
       </div>
     </div>
-  </form>
+  </div>
+  <!-- </form> -->
 </div>

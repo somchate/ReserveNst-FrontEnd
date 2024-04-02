@@ -35,6 +35,7 @@ import { NstformiupdateitemComponent } from '../../unittrain/nstformiupdate-item
 import { NstforregisterItemComponent } from '../nstforregister-item/nstforregister-item.component';
 import { NumberOnlyDirective } from 'src/app/directive/numberonly.directive';
 import { waitForAsync } from '@angular/core/testing';
+import { FileComponent } from 'src/app/file/file.component';
 
 @Component({
   selector: 'app-nstforunit-list',
@@ -47,6 +48,7 @@ import { waitForAsync } from '@angular/core/testing';
   templateUrl: './nstforunit-list.component.html',
   styleUrls: ['./nstforunit-list.component.scss']
 })
+
 export class NstforunitListComponent implements OnInit, DoCheck {
 
   title = "ตรวจสอบ นศท.-> นำตัวขึ้นทะเบียนกองประจำการ";
@@ -333,6 +335,23 @@ export class NstforunitListComponent implements OnInit, DoCheck {
     this.nstListArrayToDoc = [];
     // setTimeout(() => { this.dialogRef.close('save') }, 1000);
     this.isDisable = "true";
+  }
+
+  getSd3Report(row: any) {
+    // this.loading=!this.loading;
+    this.dialog.open(FileComponent, {
+      minWidth: '23%',
+      height: '13%',
+      data: {
+        title: 'จัดพิมพ์หรือบันทึกข้อมูลแบบ สด.3',
+        btnText: 'พิมพ์',
+        reportType: 'sd3',
+        citizenId: row.reg_PID
+      }
+    }).afterClosed().subscribe(val => {
+
+    })
+    // this.loading=!this.loading;
   }
 
 }

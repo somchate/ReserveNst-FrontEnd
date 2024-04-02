@@ -204,4 +204,6 @@ export class NstformiupdatelistComponent implements OnInit {
     })
     // this.loading=!this.loading;
   }
+
+
 }

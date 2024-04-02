@@ -120,7 +120,7 @@
 
                             <ng-container matColumnDef="amount">
                                 <th class="text-center" mat-header-cell *matHeaderCellDef mat-sort-header>
-                                    จำนวน/ขึ้นทะเบียนฯ
+                                    นศท./สด.3
                                 </th>
                                 <td class="text-center" mat-cell *matCellDef="let row">
                                     {{ row.amount_TO_SD3 }} / {{ row.amount_IN_SD3 }}
@@ -130,7 +130,7 @@
                             <!-- Name Column -->
                             <ng-container matColumnDef="comment">
                                 <th class="text-center" mat-header-cell *matHeaderCellDef mat-sort-header>
-                                    สถานะการรับเอกสาร
+                                    การรับหนังสือ
                                 </th>
                                 <td class="text-center" mat-cell *matCellDef="let row">
                                     {{ row.recruit_DOC_DATE == null ? "ยังไม่รับเอกสาร" : row.recruit_DOC_DATE |
@@ -165,8 +165,9 @@
                                             [disabled]="row.amount_TO_SD3==0">
                                             <mat-icon>switch_account</mat-icon>
                                         </button>
-                                        <button mat-icon-button color="primary" [disabled]="row.amount_TO_SD3==0">
-                                            <mat-icon (click)="getSumarizeReport(row.id)">print</mat-icon>
+                                        <button mat-icon-button color="primary" [disabled]="row.amount_TO_SD3==0"
+                                            (click)="getSd42Report(row.id)">
+                                            <mat-icon>print</mat-icon>
                                         </button>
                                     </div>
                                 </td>
@@ -175,7 +176,7 @@
                             <!-- Name Column -->
                             <ng-container matColumnDef="option">
                                 <th class="text-center" mat-header-cell *matHeaderCellDef class="text-center">
-                                    ส่ง/ยกเลิกส่ง
+                                    ส่ง/ไม่ส่ง
                                 </th>
                                 <td mat-cell *matCellDef="let row">
                                     @if(!row.recruit_DOC_DATE && row.amount_TO_SD3 !=0 ) {

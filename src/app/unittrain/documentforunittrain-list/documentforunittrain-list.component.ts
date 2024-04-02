@@ -43,13 +43,15 @@ import { ConfirmComponent } from 'src/app/confirm/confirm.component';
 @Component({
   selector: 'app-documentforunittrain-list',
   standalone: true,
-  templateUrl: './documentforunittrain-list.component.html',
-  styleUrls: ['./documentforunittrain-list.component.scss'],
   imports: [CommonModule, MatIconModule, FormsModule, ReactiveFormsModule, MatFormFieldModule, FlexLayoutModule,
     MatTableModule, MatPaginatorModule, ThDatePipe, SpinnerStandaloneComponent, MatSortModule,
     MatCardModule, MatToolbarModule, MatIconModule, MatButtonModule, MatDialogModule, MatFormFieldModule,
-    MatInputModule, MatSelectModule, MatCheckboxModule, MatMenuModule, MatDatepickerModule, MatNativeDateModule, ProvinceslistComponent, UnittrainlistComponent, Sd3AtyearlistComponent, UnitlistComponent]
+    MatInputModule, MatSelectModule, MatCheckboxModule, MatMenuModule, MatDatepickerModule, MatNativeDateModule,
+    ProvinceslistComponent, UnittrainlistComponent, Sd3AtyearlistComponent, UnitlistComponent],
+  templateUrl: './documentforunittrain-list.component.html',
+  styleUrls: ['./documentforunittrain-list.component.scss']
 })
+
 export class DocumentforunittrainListComponent {
   docListArrayToDoc: any[] = [];
   isDisable: string = 'true';
@@ -225,16 +227,7 @@ export class DocumentforunittrainListComponent {
     })
   }
 
-  getSumarizeReport(requestid: number) {
-    this.loading = !this.loading;
-    this.dialog.open(FileComponent, {
-      width: '40%',
-      data: requestid,
-    }).afterClosed().subscribe(val => {
 
-    })
-    this.loading = !this.loading;
-  }
 
   CheckInCreate(row: any) {
     this.dataService.data = row;
@@ -403,6 +396,40 @@ export class DocumentforunittrainListComponent {
         this.isDisable = "true";
       }
     });
+  }
+
+  getSd42Report(docunmentId: Number) {
+    // this.loading=!this.loading;
+    this.dialog.open(FileComponent, {
+      minWidth: '23%',
+      height: '13%',
+      data: {
+        title: 'จัดพิมพ์หรือบันทึกข้อมูลแบบ สด.42',
+        btnText: 'พิมพ์',
+        reportType: 'sd42',
+        docId: docunmentId.toString()
+      }
+    }).afterClosed().subscribe(val => {
+
+    })
+    // this.loading=!this.loading;
+  }
+
+  getSd3Report(row: any) {
+    // this.loading=!this.loading;
+    this.dialog.open(FileComponent, {
+      minWidth: '23%',
+      height: '13%',
+      data: {
+        title: 'จัดพิมพ์หรือบันทึกข้อมูลแบบ สด.3',
+        btnText: 'พิมพ์',
+        reportType: 'sd3',
+        citizenId: row.reg_PID
+      }
+    }).afterClosed().subscribe(val => {
+
+    })
+    // this.loading=!this.loading;
   }
 }
 

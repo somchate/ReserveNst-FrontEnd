@@ -188,7 +188,8 @@
                         </th>
                         <td mat-cell *matCellDef="let row">
                             <div class="text-center" *ngIf="row.armyprovinces!=null">
-                                <button mat-icon-button color="primary" [disabled]="!row.to_SD3_MI_SIGN_NO">
+                                <button mat-icon-button color="primary" (click)="getSd3Report(row)"
+                                    [disabled]="!row.to_SD3_MI_SIGN_NO">
                                     <mat-icon>print</mat-icon>
                                 </button>
                             </div>

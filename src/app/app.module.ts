@@ -64,7 +64,6 @@ import { CachingInterceptor } from './interceptors/caching.interceptor';
     ThdatePipe,
     RequestlistComponent,
     RequestformComponent,
-    FileComponent,
     CheckInComponent,
     ResultListComponent,
     CheckInItemComponent,
