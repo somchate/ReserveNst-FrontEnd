@@ -154,6 +154,7 @@ export class NstformiupdateitemComponent implements OnInit {
       atYear: [{ value: '', }, Validators.required], // ปีการศึกษา
       nstStatusId: [{ value: '', readonly: true }, Validators.required], // สถานะภาพ
       nstApproveDate: [{ value: '' }, Validators.required],
+      unitTrainName: [{ value: '', }], // หน่วยฝึก
       regSex: [{ value: '' }], // เพศ
       regBirthday: [{ value: '', }, Validators.required],
       regHeight: [{ value: '' }, Validators.required],
@@ -301,6 +302,7 @@ export class NstformiupdateitemComponent implements OnInit {
       this.nstFormGroup.controls['atYear'].setValue(res.nst.at_YEAR);
       this.nstFormGroup.controls['nstStatusId'].setValue(res.nst.nstStatusCode[0].nst_STATUS_DESC);
       this.nstFormGroup.controls['nstApproveDate'].setValue(res.nst.nst_APPROVE_DATE == null ? new Date() : res.nst.nst_APPROVE_DATE);
+      this.nstFormGroup.controls['unitTrainName'].setValue(res.nst.armyprovinces[0].unitTrainProvinces[0].unitTrains.unit_NAME);
       this.nstFormGroup.controls['regSex'].setValue(res.nst.reg_SEX == 'M' ? 'ชาย' : 'หญิง');
       this.nstFormGroup.controls['regBirthday'].setValue(res.nst.reg_BIRTHDAY == null ? new Date() : new Date(res.nst.reg_BIRTHDAY));
       this.nstFormGroup.controls['regHeight'].setValue(res.nst.reg_HEIGHT);

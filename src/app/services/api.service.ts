@@ -290,6 +290,7 @@ export class ApiService {
       "RESERVE_TYPE_NAME": nstMiInfo.reserveTypeName,
       "TO_SD3_SAVE_DATE": saveDateUtc,
       "REG_ARMY_NOTE": nstMiInfo.regArmyNote,
+      "REG_SCHOOL_NAME": nstMiInfo.regSchoolName,
       // "RESERVE_DATE": nstMiInfo.reserveDate,
       // "SAVE_DATE": new Date((nstMiInfo.saveDate).getTime() + 25200000),
 

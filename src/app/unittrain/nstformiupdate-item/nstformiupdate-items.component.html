@@ -101,11 +101,18 @@
           readonly />
       </mat-form-field>
 
+
       <mat-form-field appearance="outline">
         <mat-label>วัน/เดือน/ปี สำเร็จการฝึกฯ</mat-label>
         <input matInput [matDatepicker]="pickerApproved" formControlName="nstApproveDate" readonly />
         <mat-datepicker-toggle matSuffix [for]="pickerApproved"></mat-datepicker-toggle>
         <mat-datepicker #pickerApproved></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>หน่วยฝึกวิชาทหาร</mat-label>
+        <input formControlName="unitTrainName" maxlength="20" matInput placeholder="หน่วยฝึกวิชาทหาร"
+          autocomplete="off" />
       </mat-form-field>
 
       <mat-form-field appearance="outline">

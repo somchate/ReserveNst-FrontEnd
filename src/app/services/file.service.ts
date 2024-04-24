@@ -44,7 +44,8 @@ export class FileService {
     var obj = {
       "fileName": "SD42",
       "template": "SD42.jasper",
-      "docId": docId
+      "docId": docId,
+      "DOCUMENT_NO": "กห 1234/2515",
     };
     return this.http.post(this.apiUrl + '/v1/reports/sd42', obj, {
       responseType: "blob",
