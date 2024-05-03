@@ -21,6 +21,8 @@ export class FileComponent implements OnInit {
 	reportType!: String;
 	citizenId: String = '';
 	docId: String = '';
+	nstSd42Value: any;
+
 
 	constructor(private fileService: FileService, private dialog: MatDialog,
 		@Inject(MAT_DIALOG_DATA) public data: any) { }
@@ -32,6 +34,7 @@ export class FileComponent implements OnInit {
 		this.reportType = this.data.reportType;
 		this.citizenId = this.data.citizenId;
 		this.docId = this.data.docId;
+		this.nstSd42Value = this.data.nstSd42Value;
 
 	}
 
@@ -48,7 +51,7 @@ export class FileComponent implements OnInit {
 	}
 
 	downloadSd42File() {
-		this.fileService.downloadSd42PdfFile(this.docId).subscribe((response: any) => {
+		this.fileService.downloadSd42PdfFile(this.docId, this.nstSd42Value).subscribe((response: any) => {
 			let blob: any = new Blob([response], { type: 'text/pdf; charset=utf-8' });
 			const url = window.URL.createObjectURL(blob);
 			// window.open(url);

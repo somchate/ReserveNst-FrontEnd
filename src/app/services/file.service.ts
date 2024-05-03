@@ -40,7 +40,22 @@ export class FileService {
     });
   }
 
-  downloadSd42PdfFile(docId: String): Observable<any> {
+  downloadSd42PdfFile(docId: String, nstSd42Value: any): Observable<any> {
+    var obj = {
+      "fileName": "SD42",
+      "template": "SD42.jasper",
+      "docId": docId,
+      "DOCUMENT_DATE": nstSd42Value.documentDate,
+      "DOCUMENT_NO": nstSd42Value.documentNo,
+      "RECRUIT_CMD": nstSd42Value.recruitUnit,
+    };
+    return this.http.post(this.apiUrl + '/v1/reports/sd42', obj, {
+      responseType: "blob",
+      headers: new HttpHeaders().append("Content-Type", "application/pdf")
+    });
+  }
+
+  downloadNstSd42PdfFile(docId: String): Observable<any> {
     var obj = {
       "fileName": "SD42",
       "template": "SD42.jasper",

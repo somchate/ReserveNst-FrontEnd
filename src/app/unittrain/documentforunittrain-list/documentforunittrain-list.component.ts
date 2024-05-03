@@ -398,7 +398,7 @@ export class DocumentforunittrainListComponent {
     });
   }
 
-  getSd42Report(docunmentId: Number) {
+  getSd42Report(row: any) {
     // this.loading=!this.loading;
     this.dialog.open(FileComponent, {
       minWidth: '23%',
@@ -407,7 +407,13 @@ export class DocumentforunittrainListComponent {
         title: 'จัดพิมพ์หรือบันทึกข้อมูลแบบ สด.42',
         btnText: 'พิมพ์',
         reportType: 'sd42',
-        docId: docunmentId.toString()
+        docId: row.id.toString(),
+        nstSd42Value: {
+          documentNo: row.doc_NO,
+          documentName: row.doc_NAME,
+          documentDate: row.doc_DATE,
+          recruitUnit: row.recruit_UNIT_SHORTNAME,
+        }
       }
     }).afterClosed().subscribe(val => {
 
